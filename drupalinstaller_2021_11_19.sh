@@ -19,32 +19,33 @@ echo "Updating and installing necessary components"
         sudo apt install -y php php-{cli,fpm,json,common,mysql,zip,gd,intl,mbstring,curl,xml,pear,tidy,soap,bcmath,xmlrpc}
         sudo apt install -y apache2 libapache2-mod-php
 
+clear
 echo "Mysql setup - please follow the steps "
 
         sudo mysql_secure_installation
-
+clear
 echo "Allow users to log in with root password"
 echo "UPDATE mysql.user SET plugin = 'mysql_native_password' WHERE User = 'root'; FLUSH PRIVILEGES; QUIT;"
         
         sudo mysql -u root
-
+clear
 echo "Please create a user and a database for drupal"
 echo "CREATE DATABASE drupal;  GRANT ALL PRIVILEGES ON drupal.* TO ‘drupal’@’localhost’ IDENTIFIED BY ‘Str0ngDrupaLP@SS’;     FLUSH PRIVILEGES; \q"
         
-        mysql -u root -p
-
+        sudo mysql -u root -p
+clear
 echo "Please set desired Memory limit and timezone in the php configaration"
 echo "memory_limit = 1024M \n date.timezone = Europe/Budapest"
         
         sudo nano /etc/php/*/apache2/php.ini
-
+clear
 echo "installing drupal"
 
         wget https://www.drupal.org/download-latest/tar.gz -O drupal.tar.gz
         tar xvf drupal.tar.gz
         rm -f drupal*.tar.gz
         sudo mv drupal-*/  /var/www/html/drupal
-
+clear
 echo "checking if drupal is in apache dir"
 
         ls /var/www/html/drupal
@@ -78,6 +79,7 @@ echo "<VirtualHost *:80>
 </VirtualHost>"
 echo "press [ENTER] to continue"
 read inp_var
+clear
 
         sudo nano /etc/apache2/sites-available/drupal.conf
         sudo apachectl -t

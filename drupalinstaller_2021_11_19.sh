@@ -26,17 +26,23 @@ echo "Mysql setup - please follow the steps "
 clear
 echo "Allow users to log in with root password"
 echo "UPDATE mysql.user SET plugin = 'mysql_native_password' WHERE User = 'root'; FLUSH PRIVILEGES; QUIT;"
-        
+echo "PRESS [ENTER] TO CONTINUE"
+read inp_var        
+
         sudo mysql -u root
 clear
 echo "Please create a user and a database for drupal"
 echo "CREATE DATABASE drupal;  GRANT ALL PRIVILEGES ON drupal.* TO ‘drupal’@’localhost’ IDENTIFIED BY ‘Str0ngDrupaLP@SS’;     FLUSH PRIVILEGES; \q"
-        
+echo "PRESS [ENTER] TO CONTINUE"
+read inp_var        
+
         sudo mysql -u root -p
 clear
 echo "Please set desired Memory limit and timezone in the php configaration"
 echo "memory_limit = 1024M \n date.timezone = Europe/Budapest"
-        
+echo "PRESS [ENTER] TO CONTINUE"
+read inp_var
+
         sudo nano /etc/php/*/apache2/php.ini
 clear
 echo "installing drupal"
@@ -77,7 +83,7 @@ echo "<VirtualHost *:80>
             RewriteRule ^(.*)$ index.php?q=$1 [L,QSA]
    </Directory>
 </VirtualHost>"
-echo "press [ENTER] to continue"
+echo "PRESS [ENTER] TO CONTINUE"
 read inp_var
 clear
 
